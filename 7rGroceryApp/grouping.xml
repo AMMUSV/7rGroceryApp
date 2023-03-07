@@ -1,0 +1,13 @@
+<suite name ="Grouping">
+<test name ="GroupingTest">
+<groups>
+<run>
+<include name ="High"></include>
+<include name ="Critical"></include>
+</run>
+</groups>
+<classes>
+<class name ="testNg.Grouping"></class>
+</classes>
+</test>
+</suite>

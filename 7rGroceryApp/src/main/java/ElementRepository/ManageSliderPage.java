@@ -51,13 +51,14 @@ public class ManageSliderPage {
 		uploadAFile();
 		sendlinkText();
 		saveTheDetails();
+		return false;
 		
 
 		}
 		
-	}
-	
-	// table[@class='table table-bordered table-hover
-	// table-sm']//tbody//tr[1]//td[4]//a[1]----------------edit
-
 }
+	
+//	// table[@class='table table-bordered table-hover
+//	// table-sm']//tbody//tr[1]//td[4]//a[1]----------------edit
+//
+//
