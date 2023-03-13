@@ -10,8 +10,6 @@ import utilities.GeneralUtilities;
 public class ManageUsersPage {
 
 	WebDriver driver;
-
-	LocationPage lcp;
 	GeneralUtilities gu = new GeneralUtilities();
 
 	public ManageUsersPage(WebDriver driver) {
@@ -19,25 +17,25 @@ public class ManageUsersPage {
 		PageFactory.initElements(driver, this);// to initiaLIZE elements with factory
 	}
 
-	@FindBy(xpath = "//p[text()='Manage Users']")
-	WebElement manageusersElement;
+	@FindBy(xpath = "(//a[@href='https://groceryapp.uniqassosiates.com/admin/list-user'])[1]")
+	WebElement manageUsersElement;
 
 	@FindBy(xpath = "//table[@class='table table-bordered table-hover table-sm']//tbody//tr//td[1]")
-	WebElement columnelements;
+	List<WebElement> userColumnelements;
 
 	@FindBy(xpath = "(//div[@class='profile-info-name'])[2]")
-	WebElement password;
+	WebElement passwordOfRubyVarghese;
 
 	public void selecetmanageUsersPage() {
-		gu.selectAnElement(manageusersElement);
+		gu.selectAnElement(manageUsersElement);
 	}
 
 	public String getTheStatusOfNeena() {
-		return gu.getTheStatusOfElement((List<WebElement>) columnelements, "Neena", 1);
+		return gu.getTheStatusOfElement(userColumnelements, "Neena", 1);
 	}
 
 	public String getThePasswordOfNimisha() {
-		String valueString = gu.getTextOfElement(password);
+		String valueString = gu.getTextOfElement(passwordOfRubyVarghese);
 		return valueString;
 	}
 }

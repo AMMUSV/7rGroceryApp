@@ -38,10 +38,6 @@ public class LocationPage {
 		editIcon.click();
 	}
 
-//	public void selectState() {
-//		state.click();
-//	}
-
 	public String selectValueFromDropDown(String valueString) {
 		String value = gu.selectValueFromDropDown(state, valueString);
 		return value;

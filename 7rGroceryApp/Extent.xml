@@ -1,12 +1,12 @@
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
 <suite name="My Test Suite">
 	<listeners>
 		<listener class-name="utilities.ExtentReport" />
 	</listeners>
 	<test name="My Test">
-
+		<parameter name="browser" value="chrome"></parameter>
 		<classes>
-			<class name="TestCases.SignInPageTestCases" />
+			<class name="TestCases.pushNotificationsPageTestCses" />
 		</classes>
 	</test>
 </suite>

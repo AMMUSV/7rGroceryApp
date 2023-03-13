@@ -44,8 +44,21 @@ public class BaseClass {
 		
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofMillis(5000));
+		driver.manage().window().maximize();
 		driver.get(prop.getProperty("BaseURL"));
 	}
+//	@BeforeMethod(alwaysRun=true)
+//	
+//	public void beforeMethod() throws IOException {
+//		testBasic();
+//		
+//		 driver =new ChromeDriver();
+//		ChromeOptions options= new ChromeOptions();
+//		options.addArguments("--remote-allow-origins=*");
+//		driver.manage().window().maximize();
+//		driver.manage().timeouts().implicitlyWait(Duration.ofMillis(5000));
+//		driver.get(prop.getProperty("BaseURL"));
+//	}
 
 	@AfterMethod
 	public void afterMethod(ITestResult iTestResult) throws IOException {

@@ -1,8 +1,6 @@
 package ElementRepository;
 
 import java.awt.AWTException;
-
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -22,7 +20,7 @@ public class ListPages {
 
 	}
 
-	@FindBy(linkText = "More info")
+	@FindBy(xpath = "//a[@href='https://groceryapp.uniqassosiates.com/admin/list-page']")
 	WebElement moreInfobutton;
 
 	@FindBy(xpath = "/html/body/div/div[1]/section/div[4]/div[2]/table/tbody/tr[1]/td[5]/a[1]") // change it

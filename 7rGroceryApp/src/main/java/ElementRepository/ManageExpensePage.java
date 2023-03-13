@@ -34,21 +34,10 @@ public class ManageExpensePage {
 	public void selectManageExpense() {
 		gu.selectAnElement(manageExpense);
 	}
-
-//	public String getTheAttributeOfManageExpence() {
-//		String value = gu.getTheAttributeOfAnElement(manageExpence, "class");
-//		return value;
-//	}
-
-//	public boolean verifyTheAttributeContainsAWord(String text) {
-//		boolean b = getTheAttributeOfManageExpence().contains(text);
-//		return b;
-//	}
-
+	
 	public boolean selectionOfManageExpenseRadioButton() {
 		gu.selectAnElement(manageExpense);
-		String result = gu.getTheAttributeStringOfAnElement(manageExpense,"class");
-		boolean value = result.contains("active");
+		boolean value = manageExpense.isSelected();
 		return value;
 
 	}

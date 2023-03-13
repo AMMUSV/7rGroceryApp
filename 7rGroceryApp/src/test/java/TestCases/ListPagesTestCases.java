@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 
 import ElementRepository.ListPages;
 import ElementRepository.SignInPage;
+import constant.Constant;
 
 
 public class ListPagesTestCases extends BaseClass {
@@ -15,15 +16,14 @@ public class ListPagesTestCases extends BaseClass {
 	public void verifyfileupload() throws Exception {
 		sp = new SignInPage(driver);
 		lp = new ListPages(driver);
-		sp.SignInCredentials("admin", "admin");
+		sp.SignInCredentials(prop.getProperty("Username"), prop.getProperty("Password"));
 		lp.selectmoreInfobutton();
 		lp.selecteditButton();
-		// lp.selectchooseFileButton();
 		lp.uploadingTheFile();
-
 		lp.selectUpdateButton();
+		
 		Boolean actualResult = lp.isAlertPresent();
-		Assert.assertTrue(actualResult, "Alert is not present");
+		Assert.assertTrue(actualResult, Constant.ERRORMESSAGE_LISTPAGES_ALERT_STRING);
 
 	}
 }

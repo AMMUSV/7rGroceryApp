@@ -17,7 +17,6 @@ import org.openqa.selenium.support.ui.Select;
 public class GeneralUtilities {
 	WebDriver driver;
 
-	
 	public void selectAnElement(WebElement element) {
 		element.click();
 	}
@@ -29,35 +28,29 @@ public class GeneralUtilities {
 	public void submitElement(WebElement element) {
 		element.submit();
 	}
+
 	public String getTagNameOfAnElement(WebElement element) {
 		return element.getTagName();
 	}
+
 	public String getCssValueOfElements(WebElement element, String propertyValue) {
 		String value = element.getCssValue(propertyValue);
 		return value;
 	}
 
-	public Boolean checkWhetherTheRadioButtonIsSelected(WebElement element) {
+	public Boolean verifyTheCheckBoxOrRadioButtonIsSelected(WebElement element) {
 		Boolean value = element.isSelected();
 		return value;
 
 	}
 
-	public Boolean verifyTheCheckBoxButtonIsSelected(WebElement element) {
-		Boolean value = element.isSelected();
-		return value;
-
-	}
-	public void scrollToFindAnElement(WebElement element,WebDriver driver) {
-		JavascriptExecutor js=(JavascriptExecutor)driver;
-		js.executeScript("arguments[0].scrollIntoView();", element);
-	}
-	public void selectByIndexFromDropDown(WebElement element,int index) {
-		Select select=new Select(element);
+	public void selectByIndexFromDropDown(WebElement element, int index) {
+		Select select = new Select(element);
 		select.selectByIndex(index);
 	}
+
 	public String getTitle(WebDriver driver) {
-		return driver.getTitle();	
+		return driver.getTitle();
 	}
 
 	public String getTextOfElement(WebElement element) {
@@ -69,8 +62,6 @@ public class GeneralUtilities {
 		Boolean value = element.isDisplayed();
 		return value;
 	}
-
-
 
 	public void fileUpload(WebDriver driver, String filepath, WebElement element) throws AWTException {
 
@@ -103,34 +94,12 @@ public class GeneralUtilities {
 		String text = seclecetedElement.getText();
 		return text;
 	}
-
-	public Boolean verifywhetherTheCheckBoxIsSelected(WebElement element) {
-		Boolean checkboxSeleceted = element.isSelected();
-		return checkboxSeleceted;
-	}
-
-	public boolean checkAnElement(List<WebElement> elements, String text) {
-		boolean value = true;
-		for (int i = 0; i < elements.size(); i++) {
-			String listedElementsTextValues = elements.get(i).getText();
-			if (!listedElementsTextValues.contains(text))
-				;
-			{
-				value = false;
-			}
-		}
-		return value;
-
-	}
-
-	public String getTheAttributeStringOfAnElement(WebElement element, String attributename) {
-
-		String attributevalue = element.getAttribute(attributename);
-		return attributevalue;
-	}
-
 	
-
+	public String getAttributeValueOfElement(WebElement element, String attributeType) {
+		String attributeValue = element.getAttribute(attributeType);
+		return attributeValue;
+	}
+	
 	public String getTheStatusOfElement(List<WebElement> elementsInColumn, String name, int d) {
 		String locator = null;
 		for (int i = 0; i < elementsInColumn.size(); i++) {
@@ -138,7 +107,8 @@ public class GeneralUtilities {
 
 			if (value.contains(name)) {
 
-				locator = "//table[@class='table table-bordered table-hover table-sm']//tbody//tr[" + (i + 1)+ "]//td[d]";
+				locator = "//table[@class='table table-bordered table-hover table-sm']//tbody//tr[" + (i + 1)
+						+ "]//td[d]";
 
 			}
 		}
@@ -148,35 +118,49 @@ public class GeneralUtilities {
 		return textValuealue;
 
 	}
-	
+
 	public String getTheCorrespondingStringValueToAnElement(WebElement element) {
-		 List<WebElement> rowValues= driver.findElements(By.xpath("//table[@class='table table-bordered table-hover table-sm']//tbody//tr//td[1]"));
-				 for(int i=0;i<rowValues.size();i++)
-	        {
-	        	if(rowValues.get(i).getText().equals(element));
-	        	{
-	        		String locator ="table[@class='table table-bordered table-hover table-sm']//tbody//tr[ \"+ i+1+ \" ]//td[5]";
-	        		 WebElement cellValue =	driver.findElement(By.xpath(locator));
-	        	        String cellValueText = cellValue.getText();
-	        	       
-	        	}
-	        	break; 
-	        	
-	        }
+		List<WebElement> rowValues = driver.findElements(
+				By.xpath("//table[@class='table table-bordered table-hover table-sm']//tbody//tr//td[1]"));
+		for (int i = 0; i < rowValues.size(); i++) {
+			if (rowValues.get(i).getText().equals(element))
+				;
+			{
+				String locator = "table[@class='table table-bordered table-hover table-sm']//tbody//tr[ \"+ i+1+ \" ]//td[5]";
+				WebElement cellValue = driver.findElement(By.xpath(locator));
+				String cellValueText = cellValue.getText();
+
+			}
+			break;
+			
+		}
 		return null;
 	}
-	
-	//table[@id='dtBasicExample']//tbody//tr[ "+ i+1+ " ]//td[4]
-	
-	//table[@class='table table-bordered table-hover table-sm']//tbody//tr//td[1]
 
-	//table[@class='table table-bordered table-hover table-sm']//tbody//tr[ "+ i+1+ " ]//td[5]
-	
 	public String getCurrentUrl(WebDriver driver2) {
-		return driver.getCurrentUrl();	
-		
+		return driver.getCurrentUrl();
+
+	}
+
+	public void selectDropDownValueByVisibleText(WebElement element, String visibleText) {
+		Select obj = new Select(element);
+		obj.selectByVisibleText(visibleText);
+
+	}
+	public boolean verifyWhetherAnItemIsInList(List<WebElement> columnElements,String searchText) {
+		boolean value = false;
+		for (int i = 0; i < columnElements.size(); i++) {
+			String ListedElementText=columnElements.get(i).getText();
+			if (ListedElementText.toLowerCase().equals(searchText.toLowerCase())) {
+				value = true;
+			}
+		}
+		return value;
+	}
+
+	public boolean verifyWhetherOptionIsSelected(WebElement element, String attributeType, String text) {
+		boolean value =element.getAttribute(attributeType).contains(text);
+		return value;
 	}
 
 }
-//table[@class='table table-bordered table-hover
-	// table-sm']//tbody//tr[1]//td[5]//a[3]------------xpath of delete icon

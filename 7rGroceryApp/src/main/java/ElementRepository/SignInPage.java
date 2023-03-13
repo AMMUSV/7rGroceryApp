@@ -19,60 +19,64 @@ public class SignInPage {
 
 	}
 
+	@FindBy(xpath = "//button[@class='btn btn-dark btn-block']")
+	WebElement signInButton;
+	
 	@FindBy(xpath = "//input[@name='username']")
 	WebElement userName;
 
 	@FindBy(xpath = "//input[@type='password']")
 	WebElement passWord;
 
-	@FindBy(xpath = "//button[@type='submit']")
-	WebElement SignInButton;
-
-	@FindBy(xpath = "//input[@name='username']")
-	WebElement inavaliUserName;
-
 	@FindBy(xpath = "//div[@class='alert alert-danger alert-dismissible']")
 	WebElement errorMessage;
 
-	@FindBy(xpath = "//input[@type='checkbox']")
-	WebElement rememberMeBox;
+	@FindBy(xpath = "//label[@for='remember']")
+	WebElement rememberMeCheckBox;
+	
+	@FindBy(xpath="//input[@id='remember']")
+	WebElement rememberMe;
+	
+	@FindBy(xpath="//div[@class='alert alert-danger alert-dismissible']")
+	WebElement alertMessage;
+	
+	
+	public void SignInCredentials(String username, String password) {
+		userName.sendKeys(username);
+		passWord.sendKeys(password);
+		signInButton.click();
+
+	}
 	public String getUrlOfSignInPage() {
 		
 		return gu.getCurrentUrl(driver);
 	}
-	public void enterInvalidUserName(String username) {
-		inavaliUserName.sendKeys(username);
-	}
-
+	
 	public String getTheTextOfSignInButton() {
-		return gu.getTextOfElement(SignInButton);
+		return gu.getTextOfElement(signInButton);
 
 	}
-
-	public String getErrorTextOfElement() {
-		String text = gu.getTextOfElement(errorMessage);
-		return text;
+	
+	public void selectRememberMeCheckBox() {
+		rememberMeCheckBox.click();
+	}
+	
+	public String getBackroundColorOfSignInButton() {
+		return gu.getCssValueOfElements(signInButton, "background-color");
 	}
 
+	public String getTextofAlertMessageWhileLogin() {
+		return gu.getTextOfElement(alertMessage);
+	}
+	
+	public String getAttributeValueOfUserName() {
+		return gu.getAttributeValueOfElement(userName,"type");
+	}
 	public Boolean verifyTherememberMeBoxCheckBoxIsSelected() {
-		Boolean value = gu.verifyTheCheckBoxButtonIsSelected(rememberMeBox);
-		return value;
-
-	}
-
-	public void selectRememberMeBox() {
-		rememberMeBox.isEnabled();
-	}
-
-	public Boolean verifyTheRemembermeCheckBoxIsSelected() {
-		Boolean selecetdCheckbox = gu.verifyTheCheckBoxButtonIsSelected(rememberMeBox);
+		Boolean selecetdCheckbox = gu.verifyTheCheckBoxOrRadioButtonIsSelected(rememberMe);
 		return selecetdCheckbox;
 	}
-
-	public void SignInCredentials(String username, String password) {
-		userName.sendKeys(username);
-		passWord.sendKeys(password);
-		SignInButton.click();
-
+	
 	}
-}
+
+

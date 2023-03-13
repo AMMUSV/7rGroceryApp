@@ -1,21 +1,24 @@
 package TestCases;
 
+import java.time.Duration;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import ElementRepository.ManageProductPage;
 import ElementRepository.SignInPage;
+import constant.Constant;
 
 public class ManageProductPageTestCase extends BaseClass {
 
 	ManageProductPage mp;
 	SignInPage sp;
 
-	// @Test
+	@Test
 	public void verifyBackGroundColorOfNewButton() {
 		mp = new ManageProductPage(driver);
 		sp = new SignInPage(driver);
-		sp.SignInCredentials("admin", "admin");
+		sp.SignInCredentials(prop.getProperty("Username"), prop.getProperty("Password"));
 		mp.clickManageProduct();
 		String actualColor = mp.getBackgroundcolorOfNewBUtton();
 		String expectedColor = "rgba(220, 53, 69, 1)";
@@ -23,39 +26,60 @@ public class ManageProductPageTestCase extends BaseClass {
 
 	}
 
-	// @Test
+	 @Test
 	public void verifyBackGroundColorOfresetButtonButton() {
 		mp = new ManageProductPage(driver);
 		sp = new SignInPage(driver);
-		sp.SignInCredentials("admin", "admin");
+		sp.SignInCredentials(prop.getProperty("Username"), prop.getProperty("Password"));
 		mp.clickManageProduct();
 		String actualColor = mp.getBackgroundcolorOfResetBUtton();
 		String expectedColor = "rgba(255, 193, 7, 1)";
 		Assert.assertEquals(actualColor, expectedColor, "bgColor of reset Button Was not as expeceted");
 
 	}
-
-	// @Test
+	@Test
+	public void verifyWhetherManageProductTabIsSelected() {
+		sp = new SignInPage(driver);
+		sp.SignInCredentials(prop.getProperty("Username"), prop.getProperty("Password"));
+		mp = new ManageProductPage(driver);
+		mp.clickManageProduct();
+		boolean actual=mp.checkWhetherManageProductTabIsSelected();
+		Assert.assertTrue(actual, Constant.ERRORMESSAGE_MANAGEPRODUCTTAB);
+	}
+	
+	@Test
+	public void verifyThePlaceHolderTextOfProductTitle() {
+		sp = new SignInPage(driver);
+		sp.SignInCredentials(prop.getProperty("Username"), prop.getProperty("Password"));
+		mp = new ManageProductPage(driver);
+		mp.clickManageProduct();
+		mp.selectSearchIcon();
+		String actualResult = mp.getPlaceholderTextOfTitleField();
+		String expectedResult = prop.getProperty("PlaceHolderTextOfTitle");
+		Assert.assertEquals(actualResult, expectedResult, Constant.ERRORMESSAGE_MANAAGEPRODUCTS_PLACEHOLDER_TEXT);
+	}
+	 @Test
 	public void verifyTheTextOfManagreProductsPage() {
 		mp = new ManageProductPage(driver);
 		sp = new SignInPage(driver);
-		sp.SignInCredentials("admin", "admin");
+		sp.SignInCredentials(prop.getProperty("Username"), prop.getProperty("Password"));
 		mp.clickManageProduct();
 		String actualText = mp.getTheTextOfManagreProductsPage();
 		String expectedText = "List Products";
-		Assert.assertEquals(actualText, expectedText, "the text of title is nit as expected");
+		Assert.assertEquals(actualText, expectedText,Constant.ERRORMESSAGE_TITLE_TEXT);
 
 	}
 
-	// @Test
+	 @Test
 	public void verifyNonVegRadioButtonIsSelected() {
 		mp = new ManageProductPage(driver);
 		sp = new SignInPage(driver);
-		sp.SignInCredentials("admin", "admin");
+		sp.SignInCredentials(prop.getProperty("Username"), prop.getProperty("Password"));
 		mp.clickManageProduct();
-		mp.clickEditButton();
+		mp.clickNewButton();
+		mp.selectRadiobButtonForNonVegInNewProduct();
 		Boolean actuavalue = mp.checkWhetherNonvegRadioButtonIsSelected();
-		Assert.assertTrue(actuavalue, "Radio button is not slected");
+		Assert.assertTrue(actuavalue,Constant.ERRORMESSAGE_RADIOBUTTON_NONVEG);
 
 	}
 
@@ -63,26 +87,23 @@ public class ManageProductPageTestCase extends BaseClass {
 	public void verifyProductsSearchByTitle() {
 		mp = new ManageProductPage(driver);
 		sp = new SignInPage(driver);
-		sp.SignInCredentials("admin", "admin");
+		sp.SignInCredentials(prop.getProperty("Username"), prop.getProperty("Password"));
 		mp.clickManageProduct();
 		mp.selectSearchIcon();
-		mp.enterTitleToBeSearched("Red Meat");
-		mp.selectSearchButton();
-		boolean actualResult = mp.getTheListOfElementsSearchedByTitles("Red Meat");
-		Assert.assertFalse(actualResult, "Products listed by searching title was not as expected");
-
+		boolean actualResult =mp.getProductsListedCorrespondingToTitleSearched(prop.getProperty("titleOfProductToBeSearched"));
+		Assert.assertTrue(actualResult,Constant.ERRORMESSAGE_PRODUCTLISTED_TITLE);
+	
 	}
-//	@Test
-//	public void verifyTheDropDownOfCategoryButton() {
-//		mp = new ManageProductPage(driver);
-//		mp.enterUserName("admin");
-//		mp.enterPassword("admin");
-//		mp.ClickSignInButton();
-//		mp.clickManageProduct();
-//		mp.selectSearchIcon();
-//		//String ActualText =mp.selectValueFromCategoryDropDown();
-//		String expectedText="Grocery & staples";
-//		Assert.assertEquals(ActualText, expectedText,"error in the seleceted dropdown value");
-//	}
-
+	
+	@Test
+		public void verifyTheSearchItemsListedByProductCategory() {
+			mp = new ManageProductPage(driver);
+			sp = new SignInPage(driver);
+			sp.SignInCredentials(prop.getProperty("Username"), prop.getProperty("Password"));
+			mp.clickManageProduct();
+			mp.selectSearchIcon();
+			driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
+			boolean actualResult=mp.getProductsListedCorrespondingToCategory(prop.getProperty("ProductCategoryToSearch"));
+			Assert.assertTrue(actualResult,Constant.ERRORMESSAGE_PRODUCTLISTED_CATEGORY);
+		}
 }

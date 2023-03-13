@@ -5,17 +5,20 @@ import org.testng.annotations.Test;
 import ElementRepository.PushNotificationsPage;
 import ElementRepository.SignInPage;
 import constant.Constant;
+import utilities.ExcelRead;
 
 public class pushNotificationsPageTestCses extends BaseClass {
 	SignInPage sp;
 	PushNotificationsPage pp;
+	ExcelRead eRead;
 
 	@Test
 	public void verifyalertmessagesSendingtheDeatails() {
 
 		pp = new PushNotificationsPage(driver);
 		sp = new SignInPage(driver);
-		sp.SignInCredentials("admin", "admin");
+		eRead=new ExcelRead();
+		sp.SignInCredentials(eRead.readFromExcelFile(1, 1),eRead.readFromExcelFile(2, 1));
 		pp.selectPushNotifications();
 		pp.enterTitle("title");
 		pp.enterDescription("details are added");
@@ -30,12 +33,12 @@ public class pushNotificationsPageTestCses extends BaseClass {
 
 		pp = new PushNotificationsPage(driver);
 		sp = new SignInPage(driver);
-		sp.SignInCredentials("admin", "admin");
+		sp.SignInCredentials(eRead.readFromExcelFile(1, 1),eRead.readFromExcelFile(2, 1));
 		pp.selectPushNotifications();
 
 		String actualColor = pp.getBackgroundcolorOfSendBUtton();
-		String expectedColor = "rgba(23, 162, 184, 1)";
-		Assert.assertEquals(actualColor, expectedColor, "bgColor of send Button Was not as expeceted");
+		String expectedColor = eRead.readFromExcelFile(9, 1);
+		Assert.assertEquals(actualColor, expectedColor, Constant.ERRORMESSAGE_BACKGROUNDCOLOR);
 
 	}
 }

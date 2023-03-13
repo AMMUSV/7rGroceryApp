@@ -1,5 +1,6 @@
 package ElementRepository;
 
+import java.time.Duration;
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
@@ -25,6 +26,9 @@ public class ManageProductPage {
 	@FindBy(xpath = "//a[@class='btn btn-rounded btn-danger']")
 	WebElement newButton;
 
+	@FindBy(xpath = "//a[@class='btn btn-rounded btn-primary']")
+	WebElement searchIcon;
+	
 	@FindBy(xpath = "//a[@class='btn btn-rounded btn-warning']")
 	WebElement resetButton;
 
@@ -37,17 +41,14 @@ public class ManageProductPage {
 	@FindBy(xpath = "//input[@value = 'Nonveg']")
 	WebElement nonvegRadioButton;
 
-	@FindBy(xpath = "//a[@class='btn btn-rounded btn-primary']")
-	WebElement searchIcon;
-
 	@FindBy(xpath = "//input[@placeholder='Title']")
 	WebElement titlebox;
 
 	@FindBy(xpath = "//select[@id='cat_id']")
 	WebElement category;
-
-	@FindBy(xpath = "//button[@class='btn btn-danger btn-fix']")
-	WebElement searchButton;
+	
+	@FindBy(xpath="//button[@class='btn btn-danger btn-fix']")
+	WebElement searchActionButton;
 
 	@FindBy(xpath = "//table[@class='table table-bordered table-hover table-sm']//tbody//tr//td[1]")
 	List<WebElement> columnElementsByTitle;
@@ -59,10 +60,10 @@ public class ManageProductPage {
 		managaeProductElement.click();
 	}
 
-	public void clickEditButton() {
-		editButton.click();
+	public void clickNewButton() {
+		newButton.click();
 	}
-
+	
 	public String getBackgroundcolorOfNewBUtton() {
 
 		String bgclor = gu.getCssValueOfElements(newButton, "background-color");
@@ -76,15 +77,22 @@ public class ManageProductPage {
 		return bgclor;
 
 	}
-
+	
+	
 	public String getTheTextOfManagreProductsPage() {
 		String textOfTitle = gu.getTextOfElement(titleOfManageProductPage);
 		return textOfTitle;
 
 	}
 
+	public void selectRadiobButtonForNonVegInNewProduct() {
+		nonvegRadioButton.click();
+
+	}
+
+
 	public Boolean checkWhetherNonvegRadioButtonIsSelected() {
-		Boolean value = gu.checkWhetherTheRadioButtonIsSelected(nonvegRadioButton);
+		Boolean value = gu.verifyTheCheckBoxOrRadioButtonIsSelected(nonvegRadioButton);
 		return value;
 
 	}
@@ -99,18 +107,31 @@ public class ManageProductPage {
 
 	}
 
-//	public void enterCategoryToBeSearched(String categoryValue) {
-//		category.sendKeys(categoryValue);
-//}
-	public void selectSearchButton() {
-		gu.selectAnElement(searchButton);
-
-	}
-
-	public boolean getTheListOfElementsSearchedByTitles(String title) {
-		return gu.checkAnElement(columnElementsByTitle, title);
+	public void clickSearchActionButton() {
+		gu.selectAnElement(searchActionButton);
 
 	}
 	
+	public String getPlaceholderTextOfTitleField() {
+		return gu.getAttributeValueOfElement(titlebox, "placeholder");
 
+	}
+	public boolean checkWhetherManageProductTabIsSelected() {
+		return gu.verifyWhetherOptionIsSelected(managaeProductElement,"class","active");
+		
+	}
+	
+	public boolean getProductsListedCorrespondingToTitleSearched(String title) {
+		enterTitleToBeSearched(title);
+		clickSearchActionButton();
+		return gu.verifyWhetherAnItemIsInList(columnElementsByTitle,title );
+	}
+	public boolean getProductsListedCorrespondingToCategory(String categoryValue) {
+		gu.selectDropDownValueByVisibleText(category,categoryValue);
+		driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
+		clickSearchActionButton();
+		driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
+		return gu.verifyWhetherAnItemIsInList(columnElementsByCategory,categoryValue);
+	}
+	
 }

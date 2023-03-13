@@ -1,12 +1,12 @@
 package ElementRepository;
 
 import java.awt.AWTException;
+import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
 import utilities.GeneralUtilities;
 
 public class ManageSliderPage {
@@ -33,7 +33,19 @@ public class ManageSliderPage {
 
 	@FindBy(xpath = "//button[@class='btn btn-danger']")
 	WebElement saveElement;
+	
+	@FindBy(xpath = "//table[@class='table table-bordered table-hover table-sm']//tbody//tr//td[2]")
+	List<WebElement>  columnLinkElementListElement;
 
+	public void selectManageSlider()
+	{
+		gu.selectAnElement(manageSlider);
+	}
+	
+	public void selectNewButtonElement()
+	{
+		gu.selectAnElement(newButtonElement);
+	}
 	public void uploadAFile() throws AWTException {
 		gu.fileUpload(driver, "C:\\Users\\HP\\Downloads\\pic2.jpeg", chooseFileButton);
 	}
@@ -42,23 +54,24 @@ public class ManageSliderPage {
 		linkElement.sendKeys("abc@gmail.com");
 
 	}
-
 	public void saveTheDetails() {
 		gu.submitElement(saveElement);
 	}
-	
-	public boolean checkingTheAddedDetails() throws AWTException {
+
+	public void savingNewData() throws AWTException {
 		uploadAFile();
 		sendlinkText();
 		saveTheDetails();
-		return false;
-		
 
-		}
+	}
+	public boolean checkingTheAddedElementIspresent() throws AWTException {
+		savingNewData();
+		Boolean value = gu.verifyWhetherAnItemIsInList(columnLinkElementListElement, "abc@gmail.com");
+		return value;
+	}
+	public String getThebackgroundColorOfSaveButton() {
 		
+			return gu.getCssValueOfElements(saveElement, "background-color");
+		
+	}
 }
-	
-//	// table[@class='table table-bordered table-hover
-//	// table-sm']//tbody//tr[1]//td[4]//a[1]----------------edit
-//
-//

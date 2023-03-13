@@ -1,5 +1,8 @@
 package ElementRepository;
 
+import java.util.List;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,7 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 import utilities.GeneralUtilities;
 
 public class AdminUsersPage {
-	private static Object selectDeleteButton;
+	
 
 	WebDriver driver;
 
@@ -20,35 +23,75 @@ public class AdminUsersPage {
 		PageFactory.initElements(driver, this);// to initiaLIZE elements with factory
 	}
 
-	@FindBy(linkText = "(//a[@href='https://groceryapp.uniqassosiates.com/admin/list-admin'])[2]")
-	WebElement moreInfobutton;
+	@FindBy(xpath = "//a[@href='https://groceryapp.uniqassosiates.com/admin/list-admin']")
+	WebElement adminUsers;
+
+	@FindBy(xpath = "//a[@class='btn btn-rounded btn-danger']")
+	WebElement newButton;
+
+	@FindBy(id = "username")
+	WebElement usernameField;
+
+	@FindBy(id = "password")
+	WebElement passwordField;
+
+	@FindBy(id = "user_type")
+	WebElement usertype;
+
+	@FindBy(xpath = "//button[@name='Create']")
+	WebElement saveButton;
 
 	@FindBy(xpath = "//table[@class='table table-bordered table-hover table-sm']//tbody//tr[1]//td[5]//a[3]")
 	WebElement deleteButton;
 
-	@FindBy(xpath = "(//a[@href='https://groceryapp.uniqassosiates.com/admin/user/status?id=3352&st=inactive&page_ad=1'])[1]")
-	WebElement statusElement;
-
-	@FindBy(xpath = "//a[@class='btn btn-rounded btn-primary']")
+	@FindBy(xpath = "//i[@class=' fa fa-search']")
 	WebElement searchButton;
+
+	@FindBy(xpath = "//table[@class='table table-bordered table-hover table-sm']//tbody//tr//td[1]")
+	List<WebElement> usernameList;
+	
+	public void selectAdminUsersPage() {
+		gu.selectAnElement(adminUsers);
+		
+	}
+	
+	public void addingNewUsers(String username, String password, String type) {
+		newButton.click();
+		usernameField.sendKeys(username);
+
+		passwordField.sendKeys(password);
+		gu.selectDropDownValueByVisibleText(usertype, type);
+		saveButton.click();
+	}
+
+	public boolean verifyUserIsPresent(String username) {
+		return gu.verifyWhetherAnItemIsInList(usernameList, username);
+	}
 
 	public void selectDeleteButton() {
 		gu.selectAnElement(deleteButton);
-	}
-
-	public String presenceOfAlertmessage() {
-		String value = ((WebDriver) AdminUsersPage.selectDeleteButton).switchTo().alert().getText();
-		return value;
-
-	}
-
-	public void selectmoreInfobutton() {
-		gu.selectAnElement(moreInfobutton);
 	}
 
 	public String getCssValueOfsearchButton() {
 		String value = gu.getCssValueOfElements(searchButton, "background-color");
 		return value;
 	}
+
+	public void deleteUser(String user) {
+		String locator = null;
+		for (int i = 0; i < usernameList.size(); i += 2) {
+			if ((usernameList.get(i).getText()).equals(user)) {
+				locator = "//table[@class='table table-bordered table-hover table-sm']//tbody//tr[" + (i + 1)
+						+ "]//td[5]//a[3]";
+				break;
+			}
+		}
+		System.out.println("locator" + locator);
+		WebElement deleteUser = driver.findElement(By.xpath(locator));
+		deleteUser.click();
+		driver.switchTo().alert().accept();
+	}
+
+	
 
 }
