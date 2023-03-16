@@ -13,4 +13,11 @@ public class DataProviderClass {
 	public Object[][] dpMethod1(){
 		return new Object[][] {{"albin", "Staff" },{"adithya","Staff" }};}
 	
+	
+	@DataProvider (name = "add_deliveryBoy")
+	public Object[][] dpMethod2(){
+		return new Object[][] {{"ammu", "ammusv"}};}
+	
+
+	
 }

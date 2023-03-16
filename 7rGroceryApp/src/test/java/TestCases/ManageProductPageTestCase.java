@@ -1,11 +1,10 @@
 package TestCases;
 
-import java.time.Duration;
+
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import ElementRepository.ManageDeliveryBoyPage;
 import ElementRepository.ManageProductPage;
 import ElementRepository.SignInPage;
 import constant.Constant;
@@ -15,7 +14,7 @@ public class ManageProductPageTestCase extends BaseClass {
 	ManageProductPage mp;
 	SignInPage sp;
 
-	@Test
+	@Test(priority = 1, groups = { "regression" })
 	public void verifyBackGroundColorOfNewButton() {
 		mp = new ManageProductPage(driver);
 		sp = new SignInPage(driver);
@@ -27,7 +26,7 @@ public class ManageProductPageTestCase extends BaseClass {
 
 	}
 
-	@Test
+	@Test(priority = 2, groups = { "sanity","regression" })
 	public void verifyBackGroundColorOfresetButtonButton() {
 		mp = new ManageProductPage(driver);
 		sp = new SignInPage(driver);
@@ -39,7 +38,7 @@ public class ManageProductPageTestCase extends BaseClass {
 
 	}
 
-	@Test
+	@Test(priority = 3, groups = { "regression" })
 	public void verifyWhetherManageProductTabIsSelected() {
 		sp = new SignInPage(driver);
 		sp.SignInCredentials(prop.getProperty("Username"), prop.getProperty("Password"));
@@ -49,7 +48,7 @@ public class ManageProductPageTestCase extends BaseClass {
 		Assert.assertTrue(actual, Constant.ERRORMESSAGE_MANAGEPRODUCTTAB);
 	}
 
-	@Test
+	@Test(priority = 4, groups = { "regression" })
 	public void verifyThePlaceHolderTextOfProductTitle() {
 		sp = new SignInPage(driver);
 		sp.SignInCredentials(prop.getProperty("Username"), prop.getProperty("Password"));
@@ -61,7 +60,7 @@ public class ManageProductPageTestCase extends BaseClass {
 		Assert.assertEquals(actualResult, expectedResult, Constant.ERRORMESSAGE_MANAAGEPRODUCTS_PLACEHOLDER_TEXT);
 	}
 
-	@Test
+	@Test(priority = 5, groups = { "regression" })
 	public void verifyTheTextOfManagreProductsPage() {
 		mp = new ManageProductPage(driver);
 		sp = new SignInPage(driver);
@@ -73,7 +72,7 @@ public class ManageProductPageTestCase extends BaseClass {
 
 	}
 
-	@Test
+	@Test(priority = 6, groups = { "regression" })
 	public void verifyNonVegRadioButtonIsSelected() {
 		mp = new ManageProductPage(driver);
 		sp = new SignInPage(driver);
@@ -86,7 +85,7 @@ public class ManageProductPageTestCase extends BaseClass {
 
 	}
 
-	@Test
+	@Test(priority = 7, groups = { "regression" })
 	public void verifyProductsSearchByTitle() {
 		mp = new ManageProductPage(driver);
 		sp = new SignInPage(driver);
@@ -99,7 +98,7 @@ public class ManageProductPageTestCase extends BaseClass {
 
 	}
 
-	@Test(priority = 2, groups = { "regression" })
+	@Test(priority = 8, groups = { "regression" })
 	public void verifyFunctionalityOfRestButton() {
 		sp = new SignInPage(driver);
 		mp = new ManageProductPage(driver);

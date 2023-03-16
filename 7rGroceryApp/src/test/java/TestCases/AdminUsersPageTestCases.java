@@ -27,8 +27,7 @@ public class AdminUsersPageTestCases extends BaseClass {
 		Assert.assertEquals(actualColor, expectedColor, "bgColor of NewFolderAction Button Was not as expeceted");
 	}
 
-	@Test(dataProvider = "add_user", dataProviderClass = DataProviderClass.class, groups = { "sanity",
-			"regression" }, priority = 1, retryAnalyzer = RetryUtils.class)
+	@Test(dataProvider = "add_user", dataProviderClass = DataProviderClass.class, groups = { "sanity","regression" }, priority = 1, retryAnalyzer = RetryUtils.class)
 	public void verifyUsersAreAdded(String username, String type) {
 		sp = new SignInPage(driver);
 		sp.SignInCredentials(prop.getProperty("Username"), prop.getProperty("Password"));
