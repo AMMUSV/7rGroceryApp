@@ -1,4 +1,7 @@
 package ElementRepository;
+import java.util.List;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -18,14 +21,14 @@ public class ManageExpensePage {
 	@FindBy(xpath = "//i[@class='nav-icon fas fa-money-bill-alt']")
 	WebElement manageExpenseDropDown;
 
-	@FindBy(xpath = "//p[text()='Manage Expense']")
+	@FindBy(xpath = "//a[@href='https://groceryapp.uniqassosiates.com/admin/list-expense']")
 	WebElement manageExpense;
 
-	@FindBy(id = "sidebar-overlay")
+	@FindBy(xpath="//a[@class='btn btn-rounded btn-danger']")
 	WebElement newButton;
 	
-	@FindBy(xpath = "//table[@class='table table-bordered table-hover table-sm']//tbody//tr[1]//td[1]")
-	WebElement orderCashElement;
+	@FindBy(xpath = "//table[@class='table table-bordered table-hover table-sm']//tbody//tr//td[1]")
+	List<WebElement> titleColumnElements;
 
 	public void selectManageExpenseDropDown() {
 		gu.selectAnElement(manageExpenseDropDown);
@@ -35,10 +38,10 @@ public class ManageExpensePage {
 		gu.selectAnElement(manageExpense);
 	}
 	
-	public boolean selectionOfManageExpenseRadioButton() {
+	public boolean selectionOfManageExpenseButton() {
 		gu.selectAnElement(manageExpense);
-		boolean value = manageExpense.isSelected();
-		return value;
+		return gu.verifyWhetherOptionIsSelected(manageExpense, "class", "active");
+		
 
 	}
 
@@ -47,10 +50,22 @@ public class ManageExpensePage {
 		return value;
 
 	}
-	public String getTheCreditCashOfOrderCash296()
-	{
-		String value =gu.getTheCorrespondingStringValueToAnElement(orderCashElement);
-		return value;
+	public String getTheDateOfExpenceOfUser(String name) {
+		String locator = null;
+		for (int i = 0; i < titleColumnElements.size(); i++) {
+			String value = titleColumnElements.get(i).getText();
+
+			if (value.contains(name)) {
+
+				locator = "//table[@class='table table-bordered table-hover table-sm']//tbody//tr[" + (i + 1)
+						+ "]//td[2]";
+				break;
+			}
+		}
+		WebElement Date = driver.findElement(By.xpath(locator));
+	String value= Date.getText();
+	return value;
+			
 	}
 
 }

@@ -8,29 +8,23 @@ import ElementRepository.SignInPage;
 import constant.Constant;
 import utilities.ExcelRead;
 
-public class ManageUsersPageTestCases {
-	WebDriver driver;
+public class ManageUsersPageTestCases extends BaseClass {
+	
 	SignInPage sp;
 	ManageUsersPage mup;
-	ExcelRead eRead;
+	ExcelRead eRead = new ExcelRead();
+	
 	@Test
-	public void verifyTheStatusOfNeena() {
+	public void verifyTheStatusOfUser() {
 		sp = new SignInPage(driver);
-		sp.SignInCredentials(eRead.readFromExcelFile(1, 0),eRead.readFromExcelFile(1, 1));
+		sp.SignInCredentials(eRead.readFromExcelFile(1, 1),eRead.readFromExcelFile(2, 1));
 		mup = new ManageUsersPage(driver);
 		mup.selecetmanageUsersPage();
-		String actualResult = mup.getTheStatusOfNeena();
-		String expecetedResult = eRead.readFromExcelFile(3, 0);
-		Assert.assertEquals(actualResult, expecetedResult,Constant.ERRORMESSAGE_MANAGEUSERS_STATUSOF_NEENA);
-	}
-	 @Test
-	public void verifyThePasswordOfNimisha() {
-		sp = new SignInPage(driver);
-		sp.SignInCredentials(eRead.readFromExcelFile(1, 0),eRead.readFromExcelFile(1, 1));
-		mup = new ManageUsersPage(driver);
-		mup.selecetmanageUsersPage();
-		String actualResult = mup.getThePasswordOfNimisha();
-		String expectedResult = eRead.readFromExcelFile(2, 0);
+		String actualResult = mup.getTheStatusOfUser(prop.getProperty("NameOfUser"));
+		String expectedResult= prop.getProperty("StatusOfUser");
+		//String expecetedResult = eRead.readFromExcelFile(4, 0);
 		Assert.assertEquals(actualResult, expectedResult,Constant.ERRORMESSAGE_MANAGEUSERS_STATUSOF_NEENA);
 	}
+	
+
 }

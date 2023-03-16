@@ -27,7 +27,7 @@ public class ManageProductPage {
 	WebElement newButton;
 
 	@FindBy(xpath = "//a[@class='btn btn-rounded btn-primary']")
-	WebElement searchIcon;
+	WebElement searchButton;
 	
 	@FindBy(xpath = "//a[@class='btn btn-rounded btn-warning']")
 	WebElement resetButton;
@@ -43,9 +43,6 @@ public class ManageProductPage {
 
 	@FindBy(xpath = "//input[@placeholder='Title']")
 	WebElement titlebox;
-
-	@FindBy(xpath = "//select[@id='cat_id']")
-	WebElement category;
 	
 	@FindBy(xpath="//button[@class='btn btn-danger btn-fix']")
 	WebElement searchActionButton;
@@ -55,7 +52,10 @@ public class ManageProductPage {
 
 	@FindBy(xpath = "//table[@class='table table-bordered table-hover table-sm']//tbody//tr//td[3]")
 	List<WebElement> columnElementsByCategory;
-
+	
+	@FindBy(xpath="//input[@placeholder='Title']")
+	WebElement titleElement;
+	
 	public void clickManageProduct() {
 		managaeProductElement.click();
 	}
@@ -98,7 +98,7 @@ public class ManageProductPage {
 	}
 
 	public void selectSearchIcon() {
-		gu.selectAnElement(searchIcon);
+		gu.selectAnElement(searchButton);
 
 	}
 
@@ -124,14 +124,14 @@ public class ManageProductPage {
 	public boolean getProductsListedCorrespondingToTitleSearched(String title) {
 		enterTitleToBeSearched(title);
 		clickSearchActionButton();
-		return gu.verifyWhetherAnItemIsInList(columnElementsByTitle,title );
+		return gu.checkAnItemWhenSearched(columnElementsByTitle,title );
 	}
-	public boolean getProductsListedCorrespondingToCategory(String categoryValue) {
-		gu.selectDropDownValueByVisibleText(category,categoryValue);
-		driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
-		clickSearchActionButton();
-		driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
-		return gu.verifyWhetherAnItemIsInList(columnElementsByCategory,categoryValue);
+	public boolean verifyFunctionalityOfResetButton() {
+		searchButton.click();
+		resetButton.click();
+		return titleElement.isDisplayed();
+		
+		
 	}
 	
 }

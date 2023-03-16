@@ -1,8 +1,6 @@
 package TestCases;
 import java.awt.AWTException;
 
-import javax.sound.sampled.spi.AudioFileReader;
-
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import ElementRepository.ManageSliderPage;
@@ -14,16 +12,15 @@ public class ManageSliderPageTestCases extends BaseClass {
 	 
 	  SignInPage sp;
 	  ManageSliderPage msp;
-	  ExcelRead eRead;
-  @Test
-  public void verifyTheSavedDataIsPresent() throws AWTException {
+	  ExcelRead eRead= new ExcelRead();
+   @Test
+  public void verifyTheSavedDataIsPresent() {
+	  sp = new SignInPage(driver);
 	  msp = new ManageSliderPage(driver);
-		sp = new SignInPage(driver);
-		sp.SignInCredentials(prop.getProperty("Username"), prop.getProperty("Password"));
-		msp.selectManageSlider();
-		msp.selectNewButtonElement();
-		msp.savingNewData();
-		boolean actualResult=msp.checkingTheAddedElementIspresent();
+	  sp.SignInCredentials(prop.getProperty("Username"), prop.getProperty("Password"));
+	  msp.selectManageSlider();
+	  msp.selectNewButtonElement();
+		Boolean actualResult = msp.checkingTheAddedElementIspresent(prop.getProperty("EnterLinkElementValue"));
 		Assert.assertTrue(actualResult,Constant.ERRORMESSAGE_MANAGAESLIDERSPAGE_SAVEDDATA);
 	  
   }
@@ -31,8 +28,11 @@ public class ManageSliderPageTestCases extends BaseClass {
   public void verifyTheBackGroundColorOfSaveButton() {
 	  sp = new SignInPage(driver);
 	  msp = new ManageSliderPage(driver);
+	  sp.SignInCredentials(prop.getProperty("Username"), prop.getProperty("Password"));
+	  msp.selectManageSlider();
+		msp.selectNewButtonElement();
 		String actualResult = msp.getThebackgroundColorOfSaveButton();
-		String expectedResult =eRead.readFromExcelFile(7, 1) ;
+		String expectedResult =eRead.readFromExcelFile(7, 1);
 		Assert.assertEquals(actualResult, expectedResult, Constant.ERRORMESSAGE_BACKGROUNDCOLOR);
 
   }

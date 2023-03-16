@@ -8,6 +8,7 @@ import ElementRepository.SignInPage;
 import constant.Constant;
 
 
+
 public class ListPagesTestCases extends BaseClass {
 	SignInPage sp;
 	ListPages lp;
@@ -17,7 +18,8 @@ public class ListPagesTestCases extends BaseClass {
 		sp = new SignInPage(driver);
 		lp = new ListPages(driver);
 		sp.SignInCredentials(prop.getProperty("Username"), prop.getProperty("Password"));
-		lp.selectmoreInfobutton();
+		lp.selectmanageContentElement();
+		lp.selectmanagemanagePageElement();
 		lp.selecteditButton();
 		lp.uploadingTheFile();
 		lp.selectUpdateButton();

@@ -13,21 +13,21 @@ public class SignInPageTestCases extends BaseClass {
 
 	SignInPage sp;
 	ManageProductPage mp;
-	ExcelRead eRead;
+	ExcelRead eRead= new ExcelRead();
 
 	@Test(priority = 1)
 	public void verifyTheTextOfSignInButton() {
 		sp = new SignInPage(driver);
 		String actualResult = sp.getTheTextOfSignInButton();
-		String expectedResult = eRead.readFromExcelFile(5, 1);
+		String expectedResult = eRead.readFromExcelFile(6,1);
 		Assert.assertEquals(actualResult, expectedResult, Constant.ERRORMESSAGE_SIGNINBUTTON);
 
 	}
 
-	@Test(groups = { "Critical" }, priority = 2)
+	@Test(groups =  "Critical" , priority = 2)
 	public void verifyTheAlertMessageForErrorWhileLogIn() {
 		sp = new SignInPage(driver);
-		sp.SignInCredentials(prop.getProperty("Username"), prop.getProperty("Password"));
+		sp.SignInCredentials(prop.getProperty("InvalidUsername"), prop.getProperty("InvalidPassword"));
 		String actualResult = sp.getTextofAlertMessageWhileLogin();
 		actualResult = actualResult.replaceAll("[^a-zA-Z0-9]", " ");
 		String expectedResult = Constant.ALERTMESSAGE_TEXT;
@@ -56,7 +56,7 @@ public class SignInPageTestCases extends BaseClass {
 	public void verifyTheBackGroundColorOfSignInButton() {
 		sp = new SignInPage(driver);
 		String actualResult = sp.getBackroundColorOfSignInButton();
-		String expectedResult = eRead.readFromExcelFile(4, 1);
+		String expectedResult = eRead.readFromExcelFile(5, 1);
 		Assert.assertEquals(actualResult, expectedResult, Constant.ERRORMESSAGE_BACKGROUNDCOLOR);
 
 	}

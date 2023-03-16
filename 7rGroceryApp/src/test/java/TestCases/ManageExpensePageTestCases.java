@@ -24,26 +24,25 @@ public class ManageExpensePageTestCases extends BaseClass {
 		Assert.assertEquals(actualValue, expectedValue, "Actual background color of new button is not as expected.");
 	}
 	 @Test
-	public void checkWhetherTheRadioButtonSelecetd() {
+	public void checkWhetherTheButtonSelecetd() {
 		sp = new SignInPage(driver);
 		mep = new ManageExpensePage(driver);
 		sp.SignInCredentials(prop.getProperty("Username"),prop.getProperty("Password"));
 		mep.selectManageExpenseDropDown();
 		mep.selectManageExpense();
-		boolean actualValue = mep.selectionOfManageExpenseRadioButton();
-		boolean expecetdValue = true;
-		Assert.assertEquals(actualValue, expecetdValue,Constant.ERRORMESSAGE_SELECTIONOFRADIOBUTTON);
-				}
+		boolean actualValue = mep.selectionOfManageExpenseButton();	
+		Assert.assertTrue(actualValue,"NOT AS EXPECTED");
+	 }
 	 @Test
-	public void verifyTheCreditCashOfOrderCashElement() {
+	public void verifyTheDateOfExpenceOfUser() {
 		sp = new SignInPage(driver);
 		mep = new ManageExpensePage(driver);
 		sp.SignInCredentials(prop.getProperty("Username"),prop.getProperty("Password"));
 		mep.selectManageExpenseDropDown();
 		mep.selectManageExpense();
-		String actualValue = mep.getTheCreditCashOfOrderCash296();
-		String expecetdValue="£ 140";
-		Assert.assertEquals(actualValue, expecetdValue,Constant.ERRORMESSAGE_ONCREDITCASHELEMENT);
+		String actualValue = mep.getTheDateOfExpenceOfUser(prop.getProperty("nameOfUserInExpense"));
+		String expecetdValue=prop.getProperty("ExpectedDate");
+		Assert.assertEquals(actualValue, expecetdValue,Constant.ERRORMESSAGE_DATEOFEXPENSE_STRING);
 
 	}
 }

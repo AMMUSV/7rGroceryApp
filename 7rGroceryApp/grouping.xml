@@ -5,6 +5,8 @@
 			<run>
 				<include name="High"></include>
 				<include name="Critical"></include>
+				<include name="regression"></include>
+				<include name="sanity"></include>
 			</run>
 		</groups>
 		<parameter name= "browser" value= "chrome"></parameter>

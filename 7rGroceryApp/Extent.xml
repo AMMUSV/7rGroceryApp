@@ -4,9 +4,10 @@
 		<listener class-name="utilities.ExtentReport" />
 	</listeners>
 	<test name="My Test">
-		<parameter name="browser" value="chrome"></parameter>
+		<parameter name="browser" value="edge"></parameter>
 		<classes>
-			<class name="TestCases.pushNotificationsPageTestCses" />
+				
+			<class name="TestCases.ManageProductPageTestCase" />
 		</classes>
 	</test>
 </suite>

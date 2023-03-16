@@ -52,9 +52,7 @@ public class BaseClass {
 //	public void beforeMethod() throws IOException {
 //		testBasic();
 //		
-//		 driver =new ChromeDriver();
-//		ChromeOptions options= new ChromeOptions();
-//		options.addArguments("--remote-allow-origins=*");
+//		 driver =new EdgeDriver();
 //		driver.manage().window().maximize();
 //		driver.manage().timeouts().implicitlyWait(Duration.ofMillis(5000));
 //		driver.get(prop.getProperty("BaseURL"));
@@ -67,7 +65,7 @@ public class BaseClass {
 			scr = new ScreenShotUtility();
 			scr.captureFailureScreenShot(driver, iTestResult.getName());
 		}
-		driver.close();
+		//driver.close();
 	}
 
 }

@@ -11,7 +11,6 @@ import org.openqa.selenium.support.PageFactory;
 import utilities.GeneralUtilities;
 
 public class AdminUsersPage {
-	
 
 	WebDriver driver;
 
@@ -47,14 +46,17 @@ public class AdminUsersPage {
 	@FindBy(xpath = "//i[@class=' fa fa-search']")
 	WebElement searchButton;
 
+	@FindBy(id = "un")
+	WebElement searchName;
+
 	@FindBy(xpath = "//table[@class='table table-bordered table-hover table-sm']//tbody//tr//td[1]")
 	List<WebElement> usernameList;
-	
+
 	public void selectAdminUsersPage() {
 		gu.selectAnElement(adminUsers);
-		
+
 	}
-	
+
 	public void addingNewUsers(String username, String password, String type) {
 		newButton.click();
 		usernameField.sendKeys(username);
@@ -92,6 +94,9 @@ public class AdminUsersPage {
 		driver.switchTo().alert().accept();
 	}
 
-	
+	public boolean verifySearchButtonIsClickable() {
+		searchButton.click();
+		return searchName.isDisplayed();
+	}
 
 }

@@ -46,28 +46,26 @@ public class ManageSliderPage {
 	{
 		gu.selectAnElement(newButtonElement);
 	}
-	public void uploadAFile() throws AWTException {
-		gu.fileUpload(driver, "C:\\Users\\HP\\Downloads\\pic2.jpeg", chooseFileButton);
-	}
+	
 
 	public void sendlinkText() {
-		linkElement.sendKeys("abc@gmail.com");
+		linkElement.sendKeys("pqrst@gmail.com");
 
 	}
-	public void saveTheDetails() {
+	public void selectSaveButton() {
+		
 		gu.submitElement(saveElement);
 	}
 
-	public void savingNewData() throws AWTException {
-		uploadAFile();
-		sendlinkText();
-		saveTheDetails();
 
-	}
-	public boolean checkingTheAddedElementIspresent() throws AWTException {
-		savingNewData();
-		Boolean value = gu.verifyWhetherAnItemIsInList(columnLinkElementListElement, "abc@gmail.com");
+	public boolean checkingTheAddedElementIspresent(String text) {
+		gu.fileUpload(driver, "C:\\Users\\HP\\Downloads\\newpic.jpg", chooseFileButton);
+		sendlinkText();
+		selectSaveButton();
+		selectManageSlider();
+		boolean value =gu.verifyWhetherAnItemIsInList(columnLinkElementListElement, text);
 		return value;
+		
 	}
 	public String getThebackgroundColorOfSaveButton() {
 		

@@ -10,14 +10,13 @@ import utilities.ExcelRead;
 public class pushNotificationsPageTestCses extends BaseClass {
 	SignInPage sp;
 	PushNotificationsPage pp;
-	ExcelRead eRead;
+	ExcelRead eRead = new ExcelRead();
 
 	@Test
 	public void verifyalertmessagesSendingtheDeatails() {
 
 		pp = new PushNotificationsPage(driver);
 		sp = new SignInPage(driver);
-		eRead=new ExcelRead();
 		sp.SignInCredentials(eRead.readFromExcelFile(1, 1),eRead.readFromExcelFile(2, 1));
 		pp.selectPushNotifications();
 		pp.enterTitle("title");
@@ -37,7 +36,8 @@ public class pushNotificationsPageTestCses extends BaseClass {
 		pp.selectPushNotifications();
 
 		String actualColor = pp.getBackgroundcolorOfSendBUtton();
-		String expectedColor = eRead.readFromExcelFile(9, 1);
+		String expectedColor = prop.getProperty("expectedBackGroundColorOfSendButton");
+		//String expectedColor = eRead.readFromExcelFile(9, 1);
 		Assert.assertEquals(actualColor, expectedColor, Constant.ERRORMESSAGE_BACKGROUNDCOLOR);
 
 	}

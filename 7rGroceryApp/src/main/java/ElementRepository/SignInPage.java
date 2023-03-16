@@ -37,9 +37,6 @@ public class SignInPage {
 	@FindBy(xpath="//input[@id='remember']")
 	WebElement rememberMe;
 	
-	@FindBy(xpath="//div[@class='alert alert-danger alert-dismissible']")
-	WebElement alertMessage;
-	
 	
 	public void SignInCredentials(String username, String password) {
 		userName.sendKeys(username);
@@ -66,7 +63,9 @@ public class SignInPage {
 	}
 
 	public String getTextofAlertMessageWhileLogin() {
-		return gu.getTextOfElement(alertMessage);
+		
+		return gu.getTextOfElement(errorMessage);
+		
 	}
 	
 	public String getAttributeValueOfUserName() {

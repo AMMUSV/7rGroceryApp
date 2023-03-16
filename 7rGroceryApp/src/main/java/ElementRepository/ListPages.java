@@ -20,9 +20,12 @@ public class ListPages {
 
 	}
 
-	@FindBy(xpath = "//a[@href='https://groceryapp.uniqassosiates.com/admin/list-page']")
-	WebElement moreInfobutton;
+	@FindBy(linkText = "Manage Content")
+	WebElement manageContentElement;
 
+	@FindBy(xpath = "//a[@href='https://groceryapp.uniqassosiates.com/admin/list-page']")
+	WebElement managePageElement;
+	
 	@FindBy(xpath = "/html/body/div/div[1]/section/div[4]/div[2]/table/tbody/tr[1]/td[5]/a[1]") // change it
 	WebElement editButton;
 
@@ -35,23 +38,17 @@ public class ListPages {
 	@FindBy(xpath = "//div[@class='alert alert-success alert-dismissible']")
 	WebElement alertMessage;
 
-	public void selectmoreInfobutton() {
-		gu.selectAnElement(moreInfobutton);
+	public void selectmanageContentElement() {
+		gu.selectAnElement(manageContentElement);
+	}
+	
+	public void selectmanagemanagePageElement() {
+		gu.selectAnElement(managePageElement);
 	}
 
 	public void selecteditButton() {
 		gu.selectAnElement(editButton);
 	}
-
-//	public void dynamicTable() {
-//		gu.selectAnElement(editButton);
-//		WebElement cellValue =	@FindBy(By.xpath(locator));
-//	}
-//	
-//	public void selectchooseFileButton() {
-//		chooseFileButton.submit();
-//
-//	}
 
 	public void uploadingTheFile() throws AWTException {
 		gu.fileUpload(driver, "C:\\Users\\HP\\Downloads\\pic1.jpeg", chooseFileButton);

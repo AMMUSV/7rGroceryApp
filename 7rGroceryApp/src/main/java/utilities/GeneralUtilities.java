@@ -8,7 +8,6 @@ import java.awt.event.KeyEvent;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -62,9 +61,12 @@ public class GeneralUtilities {
 		Boolean value = element.isDisplayed();
 		return value;
 	}
+	
+		
+	
 
-	public void fileUpload(WebDriver driver, String filepath, WebElement element) throws AWTException {
-
+	public void fileUpload(WebDriver driver, String filepath, WebElement element)  {
+try {
 		Actions actions = new Actions(driver);
 		actions.moveToElement(element).perform();
 		actions.click(element).perform();
@@ -84,23 +86,20 @@ public class GeneralUtilities {
 
 		obj.keyPress(KeyEvent.VK_ENTER);
 		obj.keyRelease(KeyEvent.VK_ENTER);
+}
+catch(AWTException e) {
+	System.out.println(e);
+	}
 
 	}
 
-	public String selectValueFromDropDown(WebElement element, String textToSelect) {
-		Select obj = new Select(element);
-		obj.selectByVisibleText(textToSelect);
-		WebElement seclecetedElement = obj.getFirstSelectedOption();
-		String text = seclecetedElement.getText();
-		return text;
-	}
-	
+
 	public String getAttributeValueOfElement(WebElement element, String attributeType) {
 		String attributeValue = element.getAttribute(attributeType);
 		return attributeValue;
 	}
-	
-	public String getTheStatusOfElement(List<WebElement> elementsInColumn, String name, int d) {
+
+	public String getTheStatusOfElement(List<WebElement> elementsInColumn, String name) {
 		String locator = null;
 		for (int i = 0; i < elementsInColumn.size(); i++) {
 			String value = elementsInColumn.get(i).getText();
@@ -108,7 +107,7 @@ public class GeneralUtilities {
 			if (value.contains(name)) {
 
 				locator = "//table[@class='table table-bordered table-hover table-sm']//tbody//tr[" + (i + 1)
-						+ "]//td[d]";
+						+ "]//td[1]";
 
 			}
 		}
@@ -119,25 +118,21 @@ public class GeneralUtilities {
 
 	}
 
-	public String getTheCorrespondingStringValueToAnElement(WebElement element) {
-		List<WebElement> rowValues = driver.findElements(
-				By.xpath("//table[@class='table table-bordered table-hover table-sm']//tbody//tr//td[1]"));
-		for (int i = 0; i < rowValues.size(); i++) {
-			if (rowValues.get(i).getText().equals(element))
-				;
-			{
-				String locator = "table[@class='table table-bordered table-hover table-sm']//tbody//tr[ \"+ i+1+ \" ]//td[5]";
-				WebElement cellValue = driver.findElement(By.xpath(locator));
-				String cellValueText = cellValue.getText();
+	
 
+	public boolean checkAnItemWhenSearched(List<WebElement> columnElements, String searchText) {
+		boolean value = true;
+		for (int i = 0; i < columnElements.size(); i++) {
+			String ListedElementText = columnElements.get(i).getText();
+			if (!ListedElementText.toLowerCase().contains(searchText.toLowerCase())) {
+
+				value = false;
 			}
-			break;
-			
 		}
-		return null;
+		return value;
 	}
 
-	public String getCurrentUrl(WebDriver driver2) {
+	public String getCurrentUrl(WebDriver driver) {
 		return driver.getCurrentUrl();
 
 	}
@@ -147,19 +142,23 @@ public class GeneralUtilities {
 		obj.selectByVisibleText(visibleText);
 
 	}
-	public boolean verifyWhetherAnItemIsInList(List<WebElement> columnElements,String searchText) {
+
+	public boolean verifyWhetherAnItemIsInList(List<WebElement> columnElements, String searchText) {
 		boolean value = false;
 		for (int i = 0; i < columnElements.size(); i++) {
-			String ListedElementText=columnElements.get(i).getText();
+			String ListedElementText = columnElements.get(i).getText();
 			if (ListedElementText.toLowerCase().equals(searchText.toLowerCase())) {
+
 				value = true;
+				break;
+
 			}
 		}
 		return value;
 	}
 
 	public boolean verifyWhetherOptionIsSelected(WebElement element, String attributeType, String text) {
-		boolean value =element.getAttribute(attributeType).contains(text);
+		boolean value = element.getAttribute(attributeType).contains(text);
 		return value;
 	}
 

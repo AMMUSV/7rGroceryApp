@@ -2,7 +2,8 @@
 	<test name="ChromBrowser">
 		<parameter name="browser" value="chrome"></parameter>
 		<classes>
-			<class name="TestCases.ListPagesTestCases"></class>
+			<class name="TestCases.ListPagesTestCases">
+			</class>
 		</classes>
 	</test>
 
