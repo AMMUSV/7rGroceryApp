@@ -45,7 +45,7 @@ public class BaseClass {
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofMillis(5000));
 		driver.manage().window().maximize();
-		driver.get(prop.getProperty("BaseURL"));
+		driver.get(prop.getProperty("BaseURL"));  
 	}
 //	@BeforeMethod(alwaysRun=true)
 //	

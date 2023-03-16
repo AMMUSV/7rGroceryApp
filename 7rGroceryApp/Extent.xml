@@ -1,4 +1,3 @@
-
 <suite name="My Test Suite">
 	<listeners>
 		<listener class-name="utilities.ExtentReport" />
@@ -6,8 +5,15 @@
 	<test name="My Test">
 		<parameter name="browser" value="edge"></parameter>
 		<classes>
-				
+			<class name="TestCases.SignInPageTestCases" />
+			<class name="TestCases.AdminUsersPageTestCases" />
+			<class name="TestCases.ListPagesTestCases" />
+			<class name="TestCases.ManageDeliveryBoyPageTestCases" />
+			<class name="TestCases.ManageExpensePageTestCases" />
 			<class name="TestCases.ManageProductPageTestCase" />
+			<class name="TestCases.ManageSliderPageTestCases" />
+			<class name="TestCases.ManageUsersPageTestCases" />
+			<class name="TestCases.pushNotificationsPageTestCses" />
 		</classes>
 	</test>
 </suite>
