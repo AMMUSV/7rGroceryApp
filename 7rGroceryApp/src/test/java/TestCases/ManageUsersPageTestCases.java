@@ -14,7 +14,7 @@ public class ManageUsersPageTestCases extends BaseClass {
 	ManageUsersPage mup;
 	ExcelRead eRead = new ExcelRead();
 	
-	@Test
+	@Test(groups = { "regression" })
 	public void verifyTheStatusOfUser() {
 		sp = new SignInPage(driver);
 		sp.SignInCredentials(eRead.readFromExcelFile(1, 1),eRead.readFromExcelFile(2, 1));

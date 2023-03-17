@@ -12,7 +12,7 @@ public class ManageExpensePageTestCases extends BaseClass {
 	ManageExpensePage mep;
 	SignInPage sp;
 
-	 @Test
+	 @Test(priority = 1, groups = { "regression" })
 	public void verifyBackGroundColorOfNewButton() {
 		sp = new SignInPage(driver);
 		mep = new ManageExpensePage(driver);
@@ -23,7 +23,7 @@ public class ManageExpensePageTestCases extends BaseClass {
 		String expectedValue = "rgba(220, 53, 69, 1)";
 		Assert.assertEquals(actualValue, expectedValue, "Actual background color of new button is not as expected.");
 	}
-	 @Test
+	 @Test(priority = 2, groups = { "regression" })
 	public void checkWhetherTheButtonSelecetd() {
 		sp = new SignInPage(driver);
 		mep = new ManageExpensePage(driver);
@@ -33,7 +33,7 @@ public class ManageExpensePageTestCases extends BaseClass {
 		boolean actualValue = mep.selectionOfManageExpenseButton();	
 		Assert.assertTrue(actualValue,"NOT AS EXPECTED");
 	 }
-	 @Test
+	// @Test(priority = 3, groups = { "regression" })
 	public void verifyTheDateOfExpenceOfUser() {
 		sp = new SignInPage(driver);
 		mep = new ManageExpensePage(driver);

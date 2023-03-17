@@ -27,7 +27,7 @@ public class ManageDeliveryBoyPageTestCases extends BaseClass{
 		Assert.assertTrue(actual, Constant.ERRORMESSAGE_DELIVERYBOYNOTADDED);
 }
 
-	//@Test(priority = 2,groups = { "regression"})
+	@Test(priority = 2,groups = { "regression"})
 	public void verifyFunctionalityOfRestButton() {
 		sp = new SignInPage(driver);
 		  md= new ManageDeliveryBoyPage(driver);

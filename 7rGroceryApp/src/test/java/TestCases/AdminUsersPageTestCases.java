@@ -27,7 +27,7 @@ public class AdminUsersPageTestCases extends BaseClass {
 		Assert.assertEquals(actualColor, expectedColor, "bgColor of NewFolderAction Button Was not as expeceted");
 	}
 
-	@Test(dataProvider = "add_user", dataProviderClass = DataProviderClass.class, groups = { "sanity","regression" }, priority = 1, retryAnalyzer = RetryUtils.class)
+	@Test(dataProvider = "add_user", dataProviderClass = DataProviderClass.class, groups = { "sanity","regression" }, priority = 2, retryAnalyzer = RetryUtils.class)
 	public void verifyUsersAreAdded(String username, String type) {
 		sp = new SignInPage(driver);
 		sp.SignInCredentials(prop.getProperty("Username"), prop.getProperty("Password"));
@@ -40,7 +40,7 @@ public class AdminUsersPageTestCases extends BaseClass {
 	}
 
 	@Test(dataProvider = "delete_user", dataProviderClass = DataProviderClass.class, groups = { "sanity",
-			"regression" }, priority = 2, retryAnalyzer = RetryUtils.class)
+			"regression" }, priority = 3, retryAnalyzer = RetryUtils.class)
 	public void verifyUserIsDeleted(String username, String type) {
 		sp = new SignInPage(driver);
 		sp.SignInCredentials(prop.getProperty("Username"), prop.getProperty("Password"));
@@ -52,7 +52,7 @@ public class AdminUsersPageTestCases extends BaseClass {
 
 	}
 
-	@Test(priority = 3, groups = { "regression" })
+	@Test(priority = 4, groups = { "regression" })
 	public void verifySearchButtonIsClickable() {
 		sp = new SignInPage(driver);
 		sp.SignInCredentials(prop.getProperty("Username"), prop.getProperty("Password"));

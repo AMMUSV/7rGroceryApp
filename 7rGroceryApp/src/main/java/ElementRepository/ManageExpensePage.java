@@ -57,8 +57,7 @@ public class ManageExpensePage {
 
 			if (value.contains(name)) {
 
-				locator = "//table[@class='table table-bordered table-hover table-sm']//tbody//tr[" + (i + 1)
-						+ "]//td[2]";
+				locator = "//table[@class='table table-bordered table-hover table-sm']//tbody//tr[" + (i + 1)+ "]//td[2]";
 				break;
 			}
 		}

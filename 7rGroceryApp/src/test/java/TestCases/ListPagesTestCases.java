@@ -13,7 +13,7 @@ public class ListPagesTestCases extends BaseClass {
 	SignInPage sp;
 	ListPages lp;
 
-	@Test
+	@Test(groups = "High")
 	public void verifyfileupload() throws Exception {
 		sp = new SignInPage(driver);
 		lp = new ListPages(driver);

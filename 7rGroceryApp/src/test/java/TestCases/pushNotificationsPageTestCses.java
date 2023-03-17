@@ -12,7 +12,7 @@ public class pushNotificationsPageTestCses extends BaseClass {
 	PushNotificationsPage pp;
 	ExcelRead eRead = new ExcelRead();
 
-	@Test
+	@Test(priority = 1, groups = { "sanity" })
 	public void verifyalertmessagesSendingtheDeatails() {
 
 		pp = new PushNotificationsPage(driver);
@@ -27,7 +27,7 @@ public class pushNotificationsPageTestCses extends BaseClass {
 		Assert.assertEquals(actualResult, expecetedResult, "actual result is not as expeceted");
 	}
 
-	@Test
+	@Test(priority = 2, groups = { "sanity" })
 	public void verifyBackGroundColorOfSendButton() {
 
 		pp = new PushNotificationsPage(driver);

@@ -9,6 +9,7 @@ import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -36,7 +37,9 @@ public class BaseClass {
 		testBasic();
 		
 		if(browserValue.equals(prop.getProperty("Browser1"))) {
-			driver = new ChromeDriver();
+			ChromeOptions co=new ChromeOptions();
+			co.addArguments("--remote-allow-origins=*");
+			driver = new ChromeDriver(co);
 		}
 		else if(browserValue.equals(prop.getProperty("Browser2"))) {
 			driver = new EdgeDriver();
@@ -65,7 +68,7 @@ public class BaseClass {
 			scr = new ScreenShotUtility();
 			scr.captureFailureScreenShot(driver, iTestResult.getName());
 		}
-		//driver.close();
+		driver.close();
 	}
 
 }
