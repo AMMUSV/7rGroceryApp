@@ -12,6 +12,14 @@
 		<parameter name= "browser" value= "chrome"></parameter>
 		<classes>
 			<class name="TestCases.AdminUsersPageTestCases"></class>
+			<class name="TestCases.SignInPageTestCases" ></class>
+		<class name="TestCases.ListPagesTestCases"></class>
+		<class name="TestCases.ManageDeliveryBoyPageTestCases"></class>
+		<class name="TestCases.ManageExpensePageTestCases"></class>
+		<class name="TestCases.ManageProductPageTestCase" ></class>
+		<class name="TestCases.ManageSliderPageTestCases" ></class>
+		<class name="TestCases.ManageUsersPageTestCases" ></class>
+		<class name="TestCases.pushNotificationsPageTestCses" ></class>
 		</classes>
 	</test>
 </suite>

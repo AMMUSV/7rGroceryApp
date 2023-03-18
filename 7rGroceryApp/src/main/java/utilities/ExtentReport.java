@@ -1,4 +1,5 @@
 package utilities;
+
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -12,7 +13,6 @@ import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
-
 
 public class ExtentReport implements ITestListener {
 	ExtentSparkReporter sparkReporter;
@@ -37,8 +37,9 @@ public class ExtentReport implements ITestListener {
 		reports.attachReporter(sparkReporter);
 
 		// System details
-		reports.setSystemInfo("PC Name", "ALViNs");
+		reports.setSystemInfo("PC Name", "AMMU");
 		reports.setSystemInfo("OS", "Windows 10");
+		reports.setSystemInfo("Browser", "Chrome");
 		sparkReporter.config().setDocumentTitle("Extent Report Sample");
 		sparkReporter.config().setReportName("Report Summary");
 		sparkReporter.config().setTheme(Theme.DARK);
@@ -56,18 +57,22 @@ public class ExtentReport implements ITestListener {
 		test = reports.createTest(result.getName());
 		test.log(Status.PASS,
 				MarkupHelper.createLabel("Name of the passed test case is :" + result.getName(), ExtentColor.GREEN));
+		test.assignCategory(result.getMethod().getGroups());
 	}
 
 	public void onTestFailure(ITestResult result) {
 		test = reports.createTest(result.getName());
 		test.log(Status.FAIL,
-				MarkupHelper.createLabel("Name of the passed test case is :" + result.getName(), ExtentColor.RED));
+				MarkupHelper.createLabel("Name of the Failed Test Case is : " + result.getName(), ExtentColor.RED));
+		test.assignCategory(result.getMethod().getGroups());
+
 	}
 
 	public void onTestSkipped(ITestResult result) {
 		test = reports.createTest(result.getName());
 		test.log(Status.SKIP,
 				MarkupHelper.createLabel("Name of the passed test case is :" + result.getName(), ExtentColor.YELLOW));
+		test.assignCategory(result.getMethod().getGroups());
 	}
 
 }
