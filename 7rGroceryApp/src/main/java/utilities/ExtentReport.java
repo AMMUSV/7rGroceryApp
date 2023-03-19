@@ -21,6 +21,7 @@ public class ExtentReport implements ITestListener {
 
 	public void configureReport() {
 		Date date = new Date();
+		
 		SimpleDateFormat formatter = new SimpleDateFormat("ddMMyyyy_hhmmss");
 		String strDate = formatter.format(date);
 
@@ -71,7 +72,7 @@ public class ExtentReport implements ITestListener {
 	public void onTestSkipped(ITestResult result) {
 		test = reports.createTest(result.getName());
 		test.log(Status.SKIP,
-				MarkupHelper.createLabel("Name of the passed test case is :" + result.getName(), ExtentColor.YELLOW));
+				MarkupHelper.createLabel("Name of the skipped test case is :" + result.getName(), ExtentColor.YELLOW));
 		test.assignCategory(result.getMethod().getGroups());
 	}
 

@@ -39,8 +39,7 @@ public class AdminUsersPageTestCases extends BaseClass {
 
 	}
 
-	@Test(dataProvider = "delete_user", dataProviderClass = DataProviderClass.class, groups = { "sanity",
-			"regression" }, priority = 3, retryAnalyzer = RetryUtils.class)
+	@Test(dataProvider = "delete_user", dataProviderClass = DataProviderClass.class, groups = { "sanity","regression" }, priority = 3, retryAnalyzer = RetryUtils.class)
 	public void verifyUserIsDeleted(String username, String type) {
 		sp = new SignInPage(driver);
 		sp.SignInCredentials(prop.getProperty("Username"), prop.getProperty("Password"));
